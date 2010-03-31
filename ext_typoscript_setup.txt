@@ -1,0 +1,7 @@
+plugin.burnabitivwtags >
+plugin.burnabitivwtags = PHP_SCRIPT
+plugin.burnabitivwtags {
+	file = EXT:burnabitivwtags/burnabitivwtags.php
+}
+
+page.1 < plugin.burnabitivwtags

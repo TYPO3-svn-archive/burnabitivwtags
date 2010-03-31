@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Template file for extension user_d4s5player - channel version 0.1.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h3>Template file for extension user_d4s5player - channel version 0.1.</h3>
+<p><b>Available Markers:</b></p>
+<ul>
+  <li>###CLIENTID### Your client ID supplied by ivw (subdomain of tracking url)</li>
+  <li>###DESCRIPTION### An optional description for the html comment (if not set, page title is used)</li>
+  <li>###TRACKINGTYPE### Tracking type (should be "CP" in most cases. see documentation for further information)</li>
+  <li>###TRACKINGCODE### Tracking code</li>
+  <li>###TRACKINGCOMMENT### Tracking comment</li>
+</ul>
+<br />
+<br />
+<br />
+<br />
+<br />
+<h1>Template for IVW Tag</h1>
+<!-- ###TEMPLATE### begin -->
+<!-- IVW VERSION="1.5" - ###DESCRIPTION### -->
+<script type="text/javascript">
+<!--
+	var IVW="http://###CLIENTID###.ivwbox.de/cgi-bin/ivw/###TRACKINGTYPE###/###TRACKINGCODE###;###TRACKINGCOMMENT###";
+	document.write("<img src=\""+IVW+"?r="+escape(document.referrer)+"&d="+(Math.random()*100000)+"\" width=\"1\" height=\"1\" alt=\"szmtag\" />");
+//-->
+</script>
+<noscript>
+	<img src="http://###CLIENTID###.ivwbox.de/cgi-bin/ivw/###TRACKINGTYPE###/###TRACKINGCODE###;###TRACKINGCOMMENT###" width="1" height="1" alt="szmtag" />
+</noscript>
+<!-- /IVW - ###DESCRIPTION### -->
+<!-- ###TEMPLATE### end -->
+<br />
+<br />
+<br />
+<br />
+<br />
+</body>
+</html>

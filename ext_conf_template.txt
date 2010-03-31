@@ -1,0 +1,8 @@
+# cat=basic/enable; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:clientID
+clientID =
+
+# cat=basic/file; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:templateFile
+templateFile = EXT:burnabitivwtags/res/ivwtag.1.5.tmpl
+
+# cat=advanced; type=options[CP, NP, XP]; label=LLL:EXT:burnabitivwtags/locallang_db.xml:trackingType
+trackingType = CP
