@@ -19,6 +19,10 @@ class tx_burnabitivwtags
 	
 	function generateIvwTag($id)
 	{
+		if ( empty($this->config['clientID']) ) {
+			return "";
+		}
+		
 		$this->pageId = $id;
 		
 		$this->getPage($id);
