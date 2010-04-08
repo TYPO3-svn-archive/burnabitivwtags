@@ -18,11 +18,9 @@ $tempColumns = array (
 
 
 t3lib_div::loadTCA('pages');
+
 t3lib_extMgm::addTCAcolumns('pages',$tempColumns,1);
-//t3lib_extMgm::addToAllTCAtypes("pages","tx_burnabitivwtags_code;;;;1-1-1, tx_burnabitivwtags_enabled");
 t3lib_extMgm::addToAllTCAtypes("pages","tx_burnabitivwtags_pageconf");
 
-//t3lib_extMgm::addToAllTCAtypes('pages', 'tx_burnabitivwtags_enabled, tx_burnabitivwtags_code, tx_burnabitivwtags_comment, tx_burnabitivwtags_desc, tx_burnabitivwtags_overrides;;;;1-1-1,', 1, 'after:content_from_pid');
-
-$TCA['pages']['ctrl']['requestUpdate'] = $TCA['pages']['ctrl']['requestUpdate'] ? $TCA['pages']['ctrl']['requestUpdate'] . ',tx_burnabitivwtags_enabled' : 'tx_burnabitivwtags_enabled'; 
+$TCA['pages']['ctrl']['requestUpdate'] = $TCA['pages']['ctrl']['requestUpdate'] ? $TCA['pages']['ctrl']['requestUpdate'] . ',taggingEnabled,taggingCode,taggingComment,taggingDesc' : 'taggingEnabled,taggingCode,taggingComment,taggingDesc'; 
 ?>

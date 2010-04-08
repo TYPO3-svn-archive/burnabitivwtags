@@ -2,6 +2,7 @@
 
 class tx_burnabitivwtags
 {
+	var $debug = false;
 	var $cObj;
 	var $config;
 	var $pageId;
@@ -24,8 +25,11 @@ class tx_burnabitivwtags
 		
 		// if tagging disabled -> return ""
 		if ( $this->taggingEnabled() == false ) {
-			//return $this->log.'<br /><hr /><br />'."tagging disabled";
-			return "";
+			if ( $this->debug === true ) {
+				return $this->log;
+			} else {
+				return "";
+			}
 		}
 		
 		$ivwProps = $this->getIvwProperties();
@@ -40,9 +44,11 @@ class tx_burnabitivwtags
 		
 		$content = $this->fillTemplate($templateMarkers);
 		
-		
-		//return $this->log.'<br /><hr /><br />'.str_replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;", nl2br(htmlspecialchars($content)));
-		return $content;
+		if ( $this->debug === true ) {
+			return $this->log.'<br /><hr /><br />'.str_replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;", nl2br(htmlspecialchars($content)));
+		} else {
+			return $content;
+		}
 	}
 	
 	function getPage($id)
@@ -60,30 +66,21 @@ class tx_burnabitivwtags
 		if ( !empty($row['tx_burnabitivwtags_pageconf']) ) {
 			$row['tx_burnabitivwtags_pageconf'] = t3lib_div::xml2array($row['tx_burnabitivwtags_pageconf']);
 			$row['pageconf'] = array(
-				'enabled' => $row['tx_burnabitivwtags_pageconf']['data']['sDEF']['lDEF']['tx_burnabitivwtags_enabled']['vDEF'],
-				'code' => $row['tx_burnabitivwtags_pageconf']['data']['sDEF']['lDEF']['tx_burnabitivwtags_code']['vDEF'],
-				'comment' => $row['tx_burnabitivwtags_pageconf']['data']['sDEF']['lDEF']['tx_burnabitivwtags_comment']['vDEF'],
-				'desc' => $row['tx_burnabitivwtags_pageconf']['data']['sDEF']['lDEF']['tx_burnabitivwtags_desc']['vDEF']
-			);
-		} else {
-			$row['pageconf'] = array(
-				'enabled' => 'inherit',
-				'code' => '%default%',
-				'comment' => '%default%',
-				'desc' => '%default%'
+				'taggingEnabled' => $row['tx_burnabitivwtags_pageconf']['data']['sDEF']['lDEF']['taggingEnabled']['vDEF'],
+				'taggingCode' => $row['tx_burnabitivwtags_pageconf']['data']['sDEF']['lDEF']['taggingCode']['vDEF'],
+				'customTaggingCode' => $row['tx_burnabitivwtags_pageconf']['data']['sDEF']['lDEF']['customTaggingCode']['vDEF'],
+				'taggingComment' => $row['tx_burnabitivwtags_pageconf']['data']['sDEF']['lDEF']['taggingComment']['vDEF'],
+				'customTaggingComment' => $row['tx_burnabitivwtags_pageconf']['data']['sDEF']['lDEF']['customTaggingComment']['vDEF'],
+				'taggingDesc' => $row['tx_burnabitivwtags_pageconf']['data']['sDEF']['lDEF']['taggingDesc']['vDEF'],
+				'customTaggingDesc' => $row['tx_burnabitivwtags_pageconf']['data']['sDEF']['lDEF']['customTaggingDesc']['vDEF']
 			);
 		}
 
 		$this->pageTree[] = $row;
 		
-		# return row if "enabled" is not inherited
-		/*if ( $row['pageconf']['enabled'] != "inherit" ) {
-			return $row;
-		}*/
-		
 		# on root page reached -> return row
 		if ( $row['pid'] == 0 ) {
-			$row['pageconf']['enabled'] = ( $row['pageconf']['enabled'] == "inherit" ) ? "true" : $row['pageconf']['enabled'];
+			$row['pageconf']['taggingEnabled'] = ( $row['pageconf']['taggingEnabled'] == "inherit" ) ? "true" : $row['pageconf']['taggingEnabled'];
 			return $row;
 		}
 		
@@ -96,9 +93,9 @@ class tx_burnabitivwtags
 		foreach ( $markers as $key => $value ) {
 			$markers[$key] = strtr( $value, array(
 				'%REQUEST_URI%' => $_SERVER['REQUEST_URI'],
-				'%ID%' => $this->currentPageConf['uid'],
-				'%TITLE%' => $this->currentPageConf['title'],
-				'%NAV_TITLE%' => ( !empty($this->currentPageConf['nav_title']) ) ? $this->currentPageConf['nav_title'] : $this->currentPageConf['title']
+				'%ID%' => $this->pageTree[0]['uid'],
+				'%TITLE%' => $this->pageTree[0]['title'],
+				'%NAV_TITLE%' => ( !empty($this->pageTree[0]['nav_title']) ) ? $this->pageTree[0]['nav_title'] : $this->pageTree[0]['title']
 			) );
 		}
 		
@@ -119,16 +116,17 @@ class tx_burnabitivwtags
 		$pageDepth = count($this->pageTree);
 		
 		for ( $i = 0; $i < $pageDepth; $i++ ) {
-			$this->log .= "enabled? -> ".$this->pageTree[$i]['pageconf']['enabled'].'<br />';
+			$this->log .= $this->pageTree[$i]['uid']."# taggingEnabled -> ".$this->pageTree[$i]['pageconf']['taggingEnabled'].'<br />';
 			
-			if ( $this->pageTree[$i]['pageconf']['enabled'] == "true" ) {
+			if ( $this->pageTree[$i]['pageconf']['taggingEnabled'] == "true" ) {
 				return true;
 			} else
-			if ( $this->pageTree[$i]['pageconf']['enabled'] == "false" ) {
+			if ( $this->pageTree[$i]['pageconf']['taggingEnabled'] == "false" ) {
 				return false;
 			}
 		}
 
+		$this->log .= "0# taggingEnabled -> falling back to TRUE<br />";
 		return true;
 	}
 	
@@ -137,38 +135,37 @@ class tx_burnabitivwtags
 		$props = array(
 			'clientID' => $this->config['clientID'],
 			'trackingType' => ( $this->config['testMode'] == 1 ) ? 'XP' : 'CP',
-			'description' => $this->getPropForPage('desc'),
-			'trackingCode' => $this->getPropForPage('code'),
-			'trackingComment' => $this->getPropForPage('comment'),
+			'description' => $this->getPropForPage('taggingDesc', $this->config['defaultDesc']),
+			'trackingCode' => $this->getPropForPage('taggingCode', $this->config['defaultCode']),
+			'trackingComment' => $this->getPropForPage('taggingComment', $this->config['defaultComment']),
 		);
 		
 		return $props;
 	}
 	
-	function getPropForPage($propName)
+	function getPropForPage($propName, $defaultValue)
 	{
 		$pageDepth = count($this->pageTree);
 		
 		for ( $i = 0; $i < $pageDepth; $i++ ) {
 			switch ( $this->pageTree[$i]['pageconf'][$propName] ) {
-				case "%inherit%":
+				case "custom":
+					$this->log .= $this->pageTree[$i]['uid'].'# '.$propName." -> custom: ".$this->pageTree[$i]['pageconf']['custom'.ucfirst($propName)]."<br />";
+					return $this->pageTree[$i]['pageconf']['custom'.ucfirst($propName)];
+				break;
+				case "inherit":
 					$this->log .= $this->pageTree[$i]['uid'].'# '.$propName." -> inherit...<br />";
 					continue;
 				break;
-				case "":
-				case "%default%":
-					$this->log .= $this->pageTree[$i]['uid'].'# '.$propName." -> explicit default: ".$this->config['default'.ucfirst($propName)]."<br />";
-					return $this->config['default'.ucfirst($propName)];
-				break;
 				default:
-					$this->log .= $this->pageTree[$i]['uid'].'# '.$propName." -> found: ".$this->pageTree[$i]['pageconf'][$propName]."<br />";
-					return $this->pageTree[$i]['pageconf'][$propName];
+					$this->log .= $this->pageTree[$i]['uid'].'# '.$propName." -> explicit default: ".$defaultValue."<br />";
+					return $defaultValue;
 			}
 		}
 		
 		# return default value if all parent pages have value "%inherit%"
 		$this->log .= $propName." -> NOT found. returning default value: ".$this->pageTree[$i]['pageconf'][$propName]."<br />";
-		return $this->config['default'.ucfirst($propName)];
+		return $defaultValue;
 	}
 }
 

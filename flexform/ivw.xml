@@ -7,10 +7,10 @@
 		<type>array</type>
 		<el>
 			
-			<tx_burnabitivwtags_enabled>
+			<taggingEnabled>
 				<TCEforms>
 					<exclude>1</exclude>
-					<label>LLL:EXT:burnabitivwtags/locallang_db.xml:pages.tx_burnabitivwtags_enabled</label>
+					<label>LLL:EXT:burnabitivwtags/locallang_db.xml:pages.taggingEnabled</label>
 					<config>
 						<type>select</type>
 						<items type="array">
@@ -27,55 +27,125 @@
 								<numIndex index="1">false</numIndex>
 							</numIndex>
 						</items>
-						<default>2</default>
+						<default>inherit</default>
+						<requestUpdate>0</requestUpdate>
+					</config>
+				</TCEforms>
+			</taggingEnabled>
+			
+			<taggingCode>
+				<TCEforms>
+					<exclude>1</exclude>
+					<label>LLL:EXT:burnabitivwtags/locallang_db.xml:pages.taggingCode</label>
+					<config>
+						<type>select</type>
+						<items type="array">
+							<numIndex index="0" type="array">
+								<numIndex index="0">LLL:EXT:burnabitivwtags/locallang_db.xml:pages.inherit</numIndex>
+								<numIndex index="1">inherit</numIndex>
+							</numIndex>
+							<numIndex index="1" type="array">
+								<numIndex index="0">LLL:EXT:burnabitivwtags/locallang_db.xml:pages.default</numIndex>
+								<numIndex index="1">default</numIndex>
+							</numIndex>
+							<numIndex index="2" type="array">
+								<numIndex index="0">LLL:EXT:burnabitivwtags/locallang_db.xml:pages.custom</numIndex>
+								<numIndex index="1">custom</numIndex>
+							</numIndex>
+						</items>
+						<default>default</default>
 						<requestUpdate>1</requestUpdate>
 					</config>
 				</TCEforms>
-			</tx_burnabitivwtags_enabled>
+			</taggingCode>
 			
-			<tx_burnabitivwtags_code>
+			<customTaggingCode>
 				<TCEforms>
-					<displayCond>FIELD:tx_burnabitivwtags_enabled:!=:0</displayCond>
 					<exclude>1</exclude>
-					<label>LLL:EXT:burnabitivwtags/locallang_db.xml:pages.tx_burnabitivwtags_code</label>
+					<displayCond>FIELD:taggingCode:=:custom</displayCond>
 					<config>
 						<type>input</type>
 						<size>12</size>
 						<max>12</max>
 						<eval>trim, nospace</eval>
-						<checkbox>%default%</checkbox>
-						<default>%default%</default>
 					</config>
 				</TCEforms>
-			</tx_burnabitivwtags_code>
+			</customTaggingCode>
 			
-			<tx_burnabitivwtags_comment>
+			<taggingComment>
 				<TCEforms>
-					<displayCond>FIELD:tx_burnabitivwtags_enabled:!=:0</displayCond>
 					<exclude>1</exclude>
-					<label>LLL:EXT:burnabitivwtags/locallang_db.xml:pages.tx_burnabitivwtags_comment</label>
+					<label>LLL:EXT:burnabitivwtags/locallang_db.xml:pages.taggingComment</label>
+					<config>
+						<type>select</type>
+						<items type="array">
+							<numIndex index="0" type="array">
+								<numIndex index="0">LLL:EXT:burnabitivwtags/locallang_db.xml:pages.inherit</numIndex>
+								<numIndex index="1">inherit</numIndex>
+							</numIndex>
+							<numIndex index="1" type="array">
+								<numIndex index="0">LLL:EXT:burnabitivwtags/locallang_db.xml:pages.default</numIndex>
+								<numIndex index="1">default</numIndex>
+							</numIndex>
+							<numIndex index="2" type="array">
+								<numIndex index="0">LLL:EXT:burnabitivwtags/locallang_db.xml:pages.custom</numIndex>
+								<numIndex index="1">custom</numIndex>
+							</numIndex>
+						</items>
+						<default>default</default>
+						<requestUpdate>1</requestUpdate>
+					</config>
+				</TCEforms>
+			</taggingComment>
+			
+			<customTaggingComment>
+				<TCEforms>
+					<exclude>1</exclude>
+					<displayCond>FIELD:taggingComment:=:custom</displayCond>
 					<config>
 						<type>input</type>
 						<eval>trim</eval>
-						<checkbox>%default%</checkbox>
-						<default>%default%</default>
 					</config>
 				</TCEforms>
-			</tx_burnabitivwtags_comment>
+			</customTaggingComment>
 			
-			<tx_burnabitivwtags_desc>
+			<taggingDesc>
 				<TCEforms>
-					<displayCond>FIELD:tx_burnabitivwtags_enabled:!=:0</displayCond>
 					<exclude>1</exclude>
-					<label>LLL:EXT:burnabitivwtags/locallang_db.xml:pages.tx_burnabitivwtags_desc</label>
+					<label>LLL:EXT:burnabitivwtags/locallang_db.xml:pages.taggingDesc</label>
+					<config>
+						<type>select</type>
+						<items type="array">
+							<numIndex index="0" type="array">
+								<numIndex index="0">LLL:EXT:burnabitivwtags/locallang_db.xml:pages.inherit</numIndex>
+								<numIndex index="1">inherit</numIndex>
+							</numIndex>
+							<numIndex index="1" type="array">
+								<numIndex index="0">LLL:EXT:burnabitivwtags/locallang_db.xml:pages.default</numIndex>
+								<numIndex index="1">default</numIndex>
+							</numIndex>
+							<numIndex index="2" type="array">
+								<numIndex index="0">LLL:EXT:burnabitivwtags/locallang_db.xml:pages.custom</numIndex>
+								<numIndex index="1">custom</numIndex>
+							</numIndex>
+						</items>
+						<default>default</default>
+						<requestUpdate>1</requestUpdate>
+					</config>
+				</TCEforms>
+			</taggingDesc>
+			
+			<customTaggingDesc>
+				<TCEforms>
+					<exclude>1</exclude>
+					<displayCond>FIELD:taggingDesc:=:custom</displayCond>
 					<config>
 						<type>input</type>
 						<eval>trim</eval>
-						<checkbox>%default%</checkbox>
-						<default>%default%</default>
 					</config>
 				</TCEforms>
-			</tx_burnabitivwtags_desc>
+			</customTaggingDesc>
+			
 		</el>
 	</ROOT>
 </T3DataStructure>

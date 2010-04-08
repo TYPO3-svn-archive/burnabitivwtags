@@ -13,13 +13,15 @@
 			<label index="defaultDesc">Default HTML description: Enter free text and/or use variables: %REQUEST_URI%, %PID%, %PTITLE%, %PNAVTITLE%, %L%</label>
 			<label index="templateFile">Template File: default: EXT:burnabitivwtags/res/ivwtag.1.5.tmpl</label>
 			<label index="pages.title">IVW Settings</label>
-			<label index="pages.tx_burnabitivwtags_enabled">Enable/disable tracking for this page</label>
-			<label index="pages.tx_burnabitivwtags_code">Override default tracking code</label>
-			<label index="pages.tx_burnabitivwtags_comment">Override default tracking comment</label>
-			<label index="pages.tx_burnabitivwtags_desc">Override default HTML comment</label>
+			<label index="pages.taggingEnabled">Enable/disable tracking for this page</label>
+			<label index="pages.taggingCode">Tracking code</label>
+			<label index="pages.taggingComment">Tracking comment</label>
+			<label index="pages.taggingDesc">HTML tag description</label>
 			<label index="pages.inherit">Inherit from parent page</label>
 			<label index="pages.enabled">enabled</label>
 			<label index="pages.disabled">disabled</label>
+			<label index="pages.default">default value</label>
+			<label index="pages.custom">custom</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="testMode">Test Modus: Falls aktiv werden Test-Pixel geladen, die von IVW _nicht_ gezählt werden</label>
@@ -29,13 +31,15 @@
 			<label index="defaultDesc">Standard HTML Beschreibung: Freier Text und/oder die Variablen: %REQUEST_URI%, %PID%, %PTITLE%, %PNAVTITLE%, %L%</label>
 			<label index="templateFile">Template Datei: standard: EXT:burnabitivwtags/res/ivwtag.1.5.tmpl</label>
 			<label index="pages.title">IVW Einstellungen</label>
-			<label index="pages.tx_burnabitivwtags_enabled">Tracking für diese Seite aktivieren/deaktivieren</label>
-			<label index="pages.tx_burnabitivwtags_code">Standard Tracking Code für diese Seite überschrieben ("%inherit%" übernimmt die Werte der übergeordneten Seite)</label>
-			<label index="pages.tx_burnabitivwtags_comment">Standard Tracking Kommentar für diese Site überschreiben</label>
-			<label index="pages.tx_burnabitivwtags_desc">Standard HTML Beschreibung für diese Seite überschreiben</label>
+			<label index="pages.taggingEnabled">Tracking für diese Seite aktivieren/deaktivieren</label>
+			<label index="pages.taggingCode">Tracking Code</label>
+			<label index="pages.taggingComment">Tracking Kommentar</label>
+			<label index="pages.taggingDesc">HTML Tag Beschreibung</label>
 			<label index="pages.inherit">wie übergeordnete Seite</label>
 			<label index="pages.enabled">aktiviert</label>
 			<label index="pages.disabled">deaktiviert</label>
+			<label index="pages.default">Standard-Wert</label>
+			<label index="pages.custom">angepasst</label>
 		</languageKey>
 	</data>
 </T3locallang>
