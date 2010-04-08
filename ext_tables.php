@@ -3,37 +3,26 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 $tempColumns = array (
-	'tx_burnabitivwtags_code' => array (
+	'tx_burnabitivwtags_pageconf' => array(
 		'exclude' => 1,
-		'label' => 'LLL:EXT:burnabitivwtags/locallang_db.xml:pages.tx_burnabitivwtags_code',
-		'config' => array (
-			'type' => 'input',
-			'size' => '12',
-			'max' => '12',
-			'eval' => 'trim',
+		'label' => 'LLL:EXT:burnabitivwtags/locallang_db.xml:pages.title',
+		'config' => array(
+			'type' => 'flex',
+			'ds_pointerField' => 'list_type',
+			'ds' => array(
+				'default' => 'FILE:EXT:burnabitivwtags/flexform/ivw.xml'
+			)
 		)
-	),
-	'tx_burnabitivwtags_comment' => array (
-		'exclude' => 1,
-		'label' => 'LLL:EXT:burnabitivwtags/locallang_db.xml:pages.tx_burnabitivwtags_comment',
-		'config' => array (
-			'type' => 'input',
-			'size' => '100',
-		)
-	),
-	'tx_burnabitivwtags_desc' => array (
-		'exclude' => 1,
-		'label' => 'LLL:EXT:burnabitivwtags/locallang_db.xml:pages.tx_burnabitivwtags_desc',
-		'config' => array (
-			'type' => 'input',
-			'size' => '255',
-		)
-	),
+	)
 );
 
 
 t3lib_div::loadTCA('pages');
 t3lib_extMgm::addTCAcolumns('pages',$tempColumns,1);
+//t3lib_extMgm::addToAllTCAtypes("pages","tx_burnabitivwtags_code;;;;1-1-1, tx_burnabitivwtags_enabled");
+t3lib_extMgm::addToAllTCAtypes("pages","tx_burnabitivwtags");
 
-t3lib_extMgm::addToAllTCAtypes('pages', 'tx_burnabitivwtags_code, tx_burnabitivwtags_comment, tx_burnabitivwtags_desc', 1, 'after:nav_title');
+//t3lib_extMgm::addToAllTCAtypes('pages', 'tx_burnabitivwtags_enabled, tx_burnabitivwtags_code, tx_burnabitivwtags_comment, tx_burnabitivwtags_desc, tx_burnabitivwtags_overrides;;;;1-1-1,', 1, 'after:content_from_pid');
+
+$TCA['pages']['ctrl']['requestUpdate'] = $TCA['pages']['ctrl']['requestUpdate'] ? $TCA['pages']['ctrl']['requestUpdate'] . ',tx_burnabitivwtags_enabled' : 'tx_burnabitivwtags_enabled'; 
 ?>

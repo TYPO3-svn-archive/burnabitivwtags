@@ -1,8 +1,14 @@
+# cat=basic/enable; type=boolean; label=LLL:EXT:burnabitivwtags/locallang_db.xml:testMode
+testMode = true
+
 # cat=basic/enable; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:clientID
 clientID =
 
-# cat=basic/file; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:templateFile
-templateFile = EXT:burnabitivwtags/res/ivwtag.1.5.tmpl
+# cat=basic; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:defaultCode
+defaultCode = default
 
-# cat=advanced; type=options[CP, NP, XP]; label=LLL:EXT:burnabitivwtags/locallang_db.xml:trackingType
-trackingType = CP
+# cat=basic; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:defaultComment
+defaultComment = %REQUEST_URI%
+
+# cat=advanced/file; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:templateFile
+templateFile = EXT:burnabitivwtags/res/ivwtag.1.5.tmpl

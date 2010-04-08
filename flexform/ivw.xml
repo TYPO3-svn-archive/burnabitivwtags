@@ -1,0 +1,81 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+		<sheetTitle>dis is a sheet</sheetTitle>
+	</meta>
+	<ROOT>
+		<type>array</type>
+		<el>
+			
+			<tx_burnabitivwtags_enabled>
+				<TCEforms>
+					<exclude>1</exclude>
+					<label>LLL:EXT:burnabitivwtags/locallang_db.xml:pages.tx_burnabitivwtags_enabled</label>
+					<config>
+						<type>select</type>
+						<items type="array">
+							<numIndex index="0" type="array">
+								<numIndex index="0">LLL:EXT:burnabitivwtags/locallang_db.xml:pages.inherit</numIndex>
+								<numIndex index="1">2</numIndex>
+							</numIndex>
+							<numIndex index="1" type="array">
+								<numIndex index="0">LLL:EXT:burnabitivwtags/locallang_db.xml:pages.enabled</numIndex>
+								<numIndex index="1">1</numIndex>
+							</numIndex>
+							<numIndex index="2" type="array">
+								<numIndex index="0">LLL:EXT:burnabitivwtags/locallang_db.xml:pages.disabled</numIndex>
+								<numIndex index="1">0</numIndex>
+							</numIndex>
+						</items>
+						<default>2</default>
+						<requestUpdate>1</requestUpdate>
+					</config>
+				</TCEforms>
+			</tx_burnabitivwtags_enabled>
+			
+			<tx_burnabitivwtags_code>
+				<TCEforms>
+					<displayCond>FIELD:tx_burnabitivwtags_enabled:!=:0</displayCond>
+					<exclude>1</exclude>
+					<label>LLL:EXT:burnabitivwtags/locallang_db.xml:pages.tx_burnabitivwtags_code</label>
+					<config>
+						<type>input</type>
+						<size>12</size>
+						<max>12</max>
+						<eval>trim, nospace</eval>
+						<checkbox>inherit</checkbox>
+						<default>inherit</default>
+					</config>
+				</TCEforms>
+			</tx_burnabitivwtags_code>
+			
+			<tx_burnabitivwtags_comment>
+				<TCEforms>
+					<displayCond>FIELD:tx_burnabitivwtags_enabled:!=:0</displayCond>
+					<exclude>1</exclude>
+					<label>LLL:EXT:burnabitivwtags/locallang_db.xml:pages.tx_burnabitivwtags_comment</label>
+					<config>
+						<type>input</type>
+						<eval>trim</eval>
+						<checkbox>inherit</checkbox>
+						<default>inherit</default>
+					</config>
+				</TCEforms>
+			</tx_burnabitivwtags_comment>
+			
+			<tx_burnabitivwtags_desc>
+				<TCEforms>
+					<displayCond>FIELD:tx_burnabitivwtags_enabled:!=:0</displayCond>
+					<exclude>1</exclude>
+					<label>LLL:EXT:burnabitivwtags/locallang_db.xml:pages.tx_burnabitivwtags_desc</label>
+					<config>
+						<type>input</type>
+						<eval>trim</eval>
+						<checkbox>inherit</checkbox>
+						<default>inherit</default>
+					</config>
+				</TCEforms>
+			</tx_burnabitivwtags_desc>
+		</el>
+	</ROOT>
+</T3DataStructure>
