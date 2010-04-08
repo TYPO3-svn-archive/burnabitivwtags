@@ -10,7 +10,7 @@
 			<label index="clientID">Client ID: subdomain of tracking URL (&lt;clientid&gt;.ivwbox.de)</label>
 			<label index="defaultCode">Default tracking code: The code to use if not specified otherwise</label>
 			<label index="defaultComment">Default tracking comment: Enter free text and/or use variables: %REQUEST_URI%, %PID%, %PTITLE%, %PNAVTITLE%, %L%</label>
-			<label index="excludePages">Exclude Pages: A comma-seperated list of page ids to be excluded recursively</label>
+			<label index="defaultDesc">Default HTML description: Enter free text and/or use variables: %REQUEST_URI%, %PID%, %PTITLE%, %PNAVTITLE%, %L%</label>
 			<label index="templateFile">Template File: default: EXT:burnabitivwtags/res/ivwtag.1.5.tmpl</label>
 			<label index="pages.title">IVW Settings</label>
 			<label index="pages.tx_burnabitivwtags_enabled">Enable/disable tracking for this page</label>
@@ -25,12 +25,12 @@
 			<label index="testMode">Test Modus: Falls aktiv werden Test-Pixel geladen, die von IVW _nicht_ gezählt werden</label>
 			<label index="clientID">Angebotskennung: Subdomain der Tracking URL (&lt;angebotskennung&gt;.ivwbox.de)</label>
 			<label index="defaultCode">Standard Tracking Code: wird immer dann verwendet, wenn auf einer Seite kein spezieller Code angegeben wurde</label>
-			<label index="defaultComment">Standard Tracking Comment: Freier Text und/oder die Variablen: %REQUEST_URI%, %PID%, %PTITLE%, %PNAVTITLE%, %L%</label>
-			<label index="excludePages">Ausnahmen: Eine komma-getrennte Liste von Seiten-IDs, die vom Tagging ausgenommen werden sollen</label>
+			<label index="defaultComment">Standard Tracking Kommentar: Freier Text und/oder die Variablen: %REQUEST_URI%, %PID%, %PTITLE%, %PNAVTITLE%, %L%</label>
+			<label index="defaultDesc">Standard HTML Beschreibung: Freier Text und/oder die Variablen: %REQUEST_URI%, %PID%, %PTITLE%, %PNAVTITLE%, %L%</label>
 			<label index="templateFile">Template Datei: standard: EXT:burnabitivwtags/res/ivwtag.1.5.tmpl</label>
 			<label index="pages.title">IVW Einstellungen</label>
 			<label index="pages.tx_burnabitivwtags_enabled">Tracking für diese Seite aktivieren/deaktivieren</label>
-			<label index="pages.tx_burnabitivwtags_code">Standard Tracking Code für diese Seite überschrieben</label>
+			<label index="pages.tx_burnabitivwtags_code">Standard Tracking Code für diese Seite überschrieben ("%inherit%" übernimmt die Werte der übergeordneten Seite)</label>
 			<label index="pages.tx_burnabitivwtags_comment">Standard Tracking Kommentar für diese Site überschreiben</label>
 			<label index="pages.tx_burnabitivwtags_desc">Standard HTML Beschreibung für diese Seite überschreiben</label>
 			<label index="pages.inherit">wie übergeordnete Seite</label>

@@ -10,7 +10,7 @@ defaultCode = default
 # cat=basic/enable; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:defaultComment
 defaultComment = %REQUEST_URI%
 
-# cat=basic/enable; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:defaultHTMLComment
+# cat=basic/enable; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:defaultDesc
 defaultDesc = %TITLE%
 
 # cat=basic/file; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:templateFile

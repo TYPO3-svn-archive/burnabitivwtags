@@ -7,6 +7,7 @@ class IvwHelper
 	var $pageId;
 	var $currentPageConf;
 	var $parentPageConf;
+	var $pageTree;
 	var $log;
 	
 	function IvwHelper($cObj)
@@ -19,23 +20,26 @@ class IvwHelper
 	{
 		$this->pageId = $id;
 		
-		$this->parentPageConf = $this->getPage($id);
+		$this->getPage($id);
 		
-		if ( $this->parentPageConf['pageconf']['enabled'] == "false" ) {
-			return "";
+		// if tagging disabled -> return ""
+		if ( $this->taggingEnabled() == false ) {
+			return $this->log.'<br /><hr /><br />'."tagging disabled";
 		}
 		
+		$ivwProps = $this->getIvwProperties();
+						
 		$templateMarkers = array(
-			'###CLIENTID###' => $this->config['clientID'],
-			'###DESCRIPTION###' => ( !empty($this->currentPageConf['pageconf']['desc']) && $this->currentPageConf['pageconf']['desc'] != "%default%" ) ? $this->currentPageConf['pageconf']['desc'] : $this->config['defaultDesc'],
-			'###TRACKINGTYPE###' => ( $this->config['testMode'] == 1 ) ? 'XP' : 'CP',
-			'###TRACKINGCODE###' => ( !empty($this->currentPageConf['pageconf']['code']) && $this->currentPageConf['pageconf']['code'] != "%default%" ) ? $this->currentPageConf['pageconf']['code'] : $this->config['defaultCode'],
-			'###TRACKINGCOMMENT###' => ( !empty($this->currentPageConf['pageconf']['comment']) && $this->currentPageConf['pageconf']['comment'] != "%default%" ) ? $this->currentPageConf['pageconf']['comment'] : $this->config['defaultComment'],
+			'###CLIENTID###' => $ivwProps['clientID'],
+			'###TRACKINGTYPE###' => $ivwProps['trackingType'],
+			'###DESCRIPTION###' => $ivwProps['description'],
+			'###TRACKINGCODE###' => $ivwProps['trackingCode'],
+			'###TRACKINGCOMMENT###' => $ivwProps['trackingComment'],
 		);		
 		
 		$content = $this->fillTemplate($templateMarkers);
 		
-		return str_replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;", nl2br(htmlspecialchars($content)));
+		return $this->log.'<br /><hr /><br />'.str_replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;", nl2br(htmlspecialchars($content)));
 	}
 	
 	function getPage($id)
@@ -67,17 +71,12 @@ class IvwHelper
 			);
 		}
 
-		$this->log .= $row['uid']." -> ".$row['pageconf']['enabled'].'<br />';
-
-		# set currentPageConf
-		if ( $this->pageId == $row['uid'] ) {
-			$this->currentPageConf = $row;
-		}
+		$this->pageTree[] = $row;
 		
 		# return row if "enabled" is not inherited
-		if ( $row['pageconf']['enabled'] != "inherit" ) {
+		/*if ( $row['pageconf']['enabled'] != "inherit" ) {
 			return $row;
-		}
+		}*/
 		
 		# on root page reached -> return row
 		if ( $row['pid'] == 0 ) {
@@ -110,5 +109,62 @@ class IvwHelper
 		$template = $this->cObj->substituteMarkerArray($template, $markers);
 		
 		return $template;
+	}
+	
+	function taggingEnabled()
+	{
+		$pageDepth = count($this->pageTree);
+		
+		for ( $i = 0; $i < $pageDepth; $i++ ) {
+			$this->log .= "enabled? -> ".$this->pageTree[$i]['pageconf']['enabled'].'<br />';
+			
+			if ( $this->pageTree[$i]['pageconf']['enabled'] == "true" ) {
+				return true;
+			} else
+			if ( $this->pageTree[$i]['pageconf']['enabled'] == "false" ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	
+	function getIvwProperties()
+	{
+		$props = array(
+			'clientID' => $this->config['clientID'],
+			'trackingType' => ( $this->config['testMode'] == 1 ) ? 'XP' : 'CP',
+			'description' => $this->getPropForPage('desc'),
+			'trackingCode' => $this->getPropForPage('code'),
+			'trackingComment' => $this->getPropForPage('comment'),
+		);
+		
+		return $props;
+	}
+	
+	function getPropForPage($propName)
+	{
+		$pageDepth = count($this->pageTree);
+		
+		for ( $i = 0; $i < $pageDepth; $i++ ) {
+			switch ( $this->pageTree[$i]['pageconf'][$propName] ) {
+				case "%inherit%":
+					$this->log .= $this->pageTree[$i]['uid'].'# '.$propName." -> inherit...<br />";
+					continue;
+				break;
+				case "":
+				case "%default%":
+					$this->log .= $this->pageTree[$i]['uid'].'# '.$propName." -> explicit default: ".$this->config['default'.ucfirst($propName)]."<br />";
+					return $this->config['default'.ucfirst($propName)];
+				break;
+				default:
+					$this->log .= $this->pageTree[$i]['uid'].'# '.$propName." -> found: ".$this->pageTree[$i]['pageconf'][$propName]."<br />";
+					return $this->pageTree[$i]['pageconf'][$propName];
+			}
+		}
+		
+		# return default value if all parent pages have value "%inherit%"
+		$this->log .= $propName." -> NOT found. returning default value: ".$this->pageTree[$i]['pageconf'][$propName]."<br />";
+		return $this->config['default'.ucfirst($propName)];
 	}
 }

@@ -4,4 +4,8 @@ plugin.burnabitivwtags {
 	file = EXT:burnabitivwtags/burnabitivwtags.php
 }
 
-page.1 < plugin.burnabitivwtags
+tmp < page.1
+
+page.1 = COA
+page.1.10 < plugin.burnabitivwtags
+page.1.20 < tmp
