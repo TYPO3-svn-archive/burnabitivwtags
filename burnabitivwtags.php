@@ -37,6 +37,13 @@ if ( !is_object($this) ) {
 	die('Not called from cObj!');
 }
 
+require_once 'class.IvwHelper.php';
+
+$ivwHelper = new IvwHelper($this);
+$content = $ivwHelper->generateIvwTag($GLOBALS['TSFE']->id);
+
+
+/*
 # get page properties
 $qry = "SELECT	uid,
 				title,
@@ -76,3 +83,4 @@ if ( empty($row['tx_burnabitivwtags_code']) ) {
 	# output
 	$content = $template;
 }
+*/

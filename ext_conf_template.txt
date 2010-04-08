@@ -4,11 +4,14 @@ testMode = true
 # cat=basic/enable; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:clientID
 clientID =
 
-# cat=basic; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:defaultCode
+# cat=basic/enable; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:defaultCode
 defaultCode = default
 
-# cat=basic; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:defaultComment
+# cat=basic/enable; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:defaultComment
 defaultComment = %REQUEST_URI%
 
-# cat=advanced/file; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:templateFile
+# cat=basic/enable; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:defaultHTMLComment
+defaultDesc = %TITLE%
+
+# cat=basic/file; type=string; label=LLL:EXT:burnabitivwtags/locallang_db.xml:templateFile
 templateFile = EXT:burnabitivwtags/res/ivwtag.1.5.tmpl

@@ -16,15 +16,15 @@
 						<items type="array">
 							<numIndex index="0" type="array">
 								<numIndex index="0">LLL:EXT:burnabitivwtags/locallang_db.xml:pages.inherit</numIndex>
-								<numIndex index="1">2</numIndex>
+								<numIndex index="1">inherit</numIndex>
 							</numIndex>
 							<numIndex index="1" type="array">
 								<numIndex index="0">LLL:EXT:burnabitivwtags/locallang_db.xml:pages.enabled</numIndex>
-								<numIndex index="1">1</numIndex>
+								<numIndex index="1">true</numIndex>
 							</numIndex>
 							<numIndex index="2" type="array">
 								<numIndex index="0">LLL:EXT:burnabitivwtags/locallang_db.xml:pages.disabled</numIndex>
-								<numIndex index="1">0</numIndex>
+								<numIndex index="1">false</numIndex>
 							</numIndex>
 						</items>
 						<default>2</default>
@@ -43,8 +43,8 @@
 						<size>12</size>
 						<max>12</max>
 						<eval>trim, nospace</eval>
-						<checkbox>inherit</checkbox>
-						<default>inherit</default>
+						<checkbox>%default%</checkbox>
+						<default>%default%</default>
 					</config>
 				</TCEforms>
 			</tx_burnabitivwtags_code>
@@ -57,8 +57,8 @@
 					<config>
 						<type>input</type>
 						<eval>trim</eval>
-						<checkbox>inherit</checkbox>
-						<default>inherit</default>
+						<checkbox>%default%</checkbox>
+						<default>%default%</default>
 					</config>
 				</TCEforms>
 			</tx_burnabitivwtags_comment>
@@ -71,8 +71,8 @@
 					<config>
 						<type>input</type>
 						<eval>trim</eval>
-						<checkbox>inherit</checkbox>
-						<default>inherit</default>
+						<checkbox>%default%</checkbox>
+						<default>%default%</default>
 					</config>
 				</TCEforms>
 			</tx_burnabitivwtags_desc>
