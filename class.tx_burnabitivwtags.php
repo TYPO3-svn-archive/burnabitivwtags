@@ -1,6 +1,6 @@
 <?php
 
-class IvwHelper
+class tx_burnabitivwtags
 {
 	var $cObj;
 	var $config;
@@ -10,7 +10,7 @@ class IvwHelper
 	var $pageTree;
 	var $log;
 	
-	function IvwHelper($cObj)
+	function tx_burnabitivwtags($cObj)
 	{
 		$this->cObj = $cObj;
 		$this->config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['burnabitivwtags']);
@@ -24,7 +24,8 @@ class IvwHelper
 		
 		// if tagging disabled -> return ""
 		if ( $this->taggingEnabled() == false ) {
-			return $this->log.'<br /><hr /><br />'."tagging disabled";
+			//return $this->log.'<br /><hr /><br />'."tagging disabled";
+			return "";
 		}
 		
 		$ivwProps = $this->getIvwProperties();
@@ -39,7 +40,9 @@ class IvwHelper
 		
 		$content = $this->fillTemplate($templateMarkers);
 		
-		return $this->log.'<br /><hr /><br />'.str_replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;", nl2br(htmlspecialchars($content)));
+		
+		//return $this->log.'<br /><hr /><br />'.str_replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;", nl2br(htmlspecialchars($content)));
+		return $content;
 	}
 	
 	function getPage($id)
@@ -167,4 +170,8 @@ class IvwHelper
 		$this->log .= $propName." -> NOT found. returning default value: ".$this->pageTree[$i]['pageconf'][$propName]."<br />";
 		return $this->config['default'.ucfirst($propName)];
 	}
+}
+
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/burnabitivwtags/class.tx_burnabitivwtags.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/burnabitivwtags/class.tx_burnabitivwtags.php']);
 }

@@ -37,9 +37,9 @@ if ( !is_object($this) ) {
 	die('Not called from cObj!');
 }
 
-require_once 'class.IvwHelper.php';
+require_once 'class.tx_burnabitivwtags.php';
 
-$ivwHelper = new IvwHelper($this);
+$ivwHelper = new tx_burnabitivwtags($this);
 $content = $ivwHelper->generateIvwTag($GLOBALS['TSFE']->id);
 
 
