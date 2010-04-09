@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'IVW Tags',
-	'description' => 'Adds IVW tags to selected pages',
+	'description' => 'burnabit IVW Tags allows you to add IVW tracking code to pages.',
 	'category' => 'fe',
 	'author' => 'Paul Voss',
 	'author_email' => 'paul.voss@burnabit.com',
